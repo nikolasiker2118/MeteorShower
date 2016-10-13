@@ -21,8 +21,13 @@
             android:name=".GameSetup"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_game_setup"
+            android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".MainGame"></activity>
+        <activity
+            android:name=".MainGame"
+            android:screenOrientation="landscape">
+
+        </activity>
     </application>
 
 </manifest>
