@@ -42,5 +42,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Score button
+        Button btn_score = (Button) findViewById(R.id.button9);
+        btn_score.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Leaderboard.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

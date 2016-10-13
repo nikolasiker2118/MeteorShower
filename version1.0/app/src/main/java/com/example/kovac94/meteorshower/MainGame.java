@@ -10,10 +10,12 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class MainGame extends AppCompatActivity {
 
     GUI gui;
+    TextView txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +28,6 @@ public class MainGame extends AppCompatActivity {
 
         gui = new GUI(this);
         setContentView(gui);
-
-
-
-
     }
 
 }

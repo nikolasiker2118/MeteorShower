@@ -37,7 +37,7 @@ public class GameSetup extends AppCompatActivity implements AdapterView.OnItemCl
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, difficulty);
         spinner.setAdapter(adapter);
 
-        //Exit button
+        //Start game button
         Button btn_start = (Button) findViewById(R.id.btn_start);
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
