@@ -1,5 +1,8 @@
 package com.example.kovac94.meteorshower;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by nikolan on 10/13/2016.
  */
@@ -56,6 +59,20 @@ public class Scores {
 
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
+    }
+
+
+    public JSONObject getJSONObject() {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("id", id);
+            obj.put("nick", nick);
+            obj.put("score", score);
+            obj.put("time_played", time_played);
+        } catch (JSONException e) {
+            System.out.println("DefaultListItem.toString JSONException: "+e.getMessage());
+        }
+        return obj;
     }
 
 }
