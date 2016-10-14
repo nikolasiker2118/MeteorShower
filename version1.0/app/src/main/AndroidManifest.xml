@@ -25,9 +25,9 @@
             android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".MainGame"
-            android:screenOrientation="landscape">
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".Leaderboard"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

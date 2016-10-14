@@ -72,6 +72,7 @@ public class GUI extends View implements View.OnTouchListener{
         paint.setColor(Color.MAGENTA);
         canvas.drawLine(player.x,player.y,player.destinationX,player.destinationY,paint);
 
+
         //Draw meteor
         paint.setColor(Color.RED);
         canvas.drawCircle(meteor.x,meteor.y,meteor.radius,paint);
