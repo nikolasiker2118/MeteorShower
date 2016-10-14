@@ -51,7 +51,7 @@ public class Leaderboard extends AppCompatActivity {
         }
         // Serializing JSONArray in file
         Writer output = null;
-        File file = new File("storage/emulated/0/JsonShower.txt");
+        File file = new File("storage/emulated/0/JsonShower.json");
         try {
             output = new BufferedWriter(new FileWriter(file));
             output.write(array.toString());
