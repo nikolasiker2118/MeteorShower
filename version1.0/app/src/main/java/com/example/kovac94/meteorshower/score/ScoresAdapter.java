@@ -1,4 +1,4 @@
-package com.example.kovac94.meteorshower;
+package com.example.kovac94.meteorshower.score;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.kovac94.meteorshower.R;
 
 import java.util.ArrayList;
 

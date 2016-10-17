@@ -1,4 +1,4 @@
-package com.example.kovac94.meteorshower;
+package com.example.kovac94.meteorshower.score;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.kovac94.meteorshower.R;
 
 import org.json.JSONArray;
 
@@ -15,8 +17,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class Leaderboard extends AppCompatActivity {
 

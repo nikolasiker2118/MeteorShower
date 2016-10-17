@@ -19,15 +19,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GameSetup"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_game_setup"
-            android:screenOrientation="landscape"
-            android:theme="@style/FullscreenTheme" />
-        <activity
-            android:name=".MainGame"
+            android:name=".game.MainGame"
             android:screenOrientation="landscape"></activity>
-        <activity android:name=".Leaderboard"
+        <activity android:name=".score.Leaderboard"
             android:screenOrientation="landscape"></activity>
     </application>
 

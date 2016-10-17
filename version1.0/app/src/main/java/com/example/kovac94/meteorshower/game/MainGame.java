@@ -1,15 +1,9 @@
-package com.example.kovac94.meteorshower;
+package com.example.kovac94.meteorshower.game;
 
-import android.graphics.*;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainGame extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.kovac94.meteorshower;
+package com.example.kovac94.meteorshower.game;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -14,9 +14,10 @@ import java.util.Random;
  * Created by kovacmarko168 on 10/12/2016.
  */
 
+
 public class GUI extends View implements View.OnTouchListener{
 
-    Paint paint;
+    Paint paint,lifeBarPaint;
     Player player;
     Thread thread = Thread.currentThread();
     List<Meteor> meteors;
@@ -25,6 +26,11 @@ public class GUI extends View implements View.OnTouchListener{
     public GUI(Context context) {
         super(context);
         paint = new Paint();
+        
+        //life bar paint init
+        lifeBarPaint = new Paint();
+        lifeBarPaint.setColor(Color.argb(255,245,35,84));
+        
         setOnTouchListener(this);
         meteors = new ArrayList<>();
     }
@@ -32,7 +38,15 @@ public class GUI extends View implements View.OnTouchListener{
     //Player creation
     private void initPlayer() {
 
-        this.player = new Player(getWidth()/2,getHeight()-10);
+        this.player = new Player(this.initRocket());
+    }
+
+    //Rocket creation
+    private Rocket initRocket() {
+
+        Rocket rocket = new Rocket(getWidth()/2,getHeight()-45,10,10,false);
+        
+        return rocket;
     }
 
     //Meteor creation
@@ -48,51 +62,62 @@ public class GUI extends View implements View.OnTouchListener{
         int x = randomGenerator.nextInt(high-low) + low;
         int y = -20;
 
-        meteors.add(new Meteor(x,y,destX,getHeight()));
+        meteors.add(new Meteor(x,y,destX,getHeight(),20));
     }
 
     @Override
     public void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        if (player==null) initPlayer();
+        if (player==null)initPlayer();
         if(meteors.isEmpty()) initMeteor();
+        
 
         canvas.drawColor(Color.argb(255,43,43,43));
 
         //Draw player
         paint.setColor(Color.argb(255,76,192,128));
-        canvas.drawCircle(player.x,player.y,player.radius,paint);
+        canvas.drawCircle((float)player.getRocket().getX(),(float)player.getRocket().getY(),(float)player.getRocket().getRadius(),paint);
+
+        //Draw life bar
+        lifeBarPaint.setStyle(Paint.Style.STROKE);
+        canvas.drawRect(10,getHeight()-30,getWidth()-10,getHeight()-10,lifeBarPaint);
+
 
         for(int i=0;i<meteors.size();i++){
 
             meteors.get(i).move();
 
             //check if meteor destination is reached
-            if(meteors.get(i).x==meteors.get(i).destinationX && meteors.get(i).y==meteors.get(i).destinationY){
+            if(meteors.get(i).getX()==meteors.get(i).getDestinationX() && meteors.get(i).getY()==meteors.get(i).getDestinationY()){
                 meteors.remove(meteors.get(i));
                 initMeteor();
             }
 
             //Draw meteor
             paint.setColor(Color.RED);
-            canvas.drawCircle(meteors.get(i).x,meteors.get(i).y,meteors.get(i).radius,paint);
+            canvas.drawCircle((float)meteors.get(i).getX(),(float)meteors.get(i).getY(),(float)meteors.get(i).getRadius(),paint);
 
 
             //Check if player destination is reached
-            if (player.x==player.destinationX && player.y==player.destinationY && player.destinationX!=getWidth()/2 && player.destinationY!=getHeight()-10){
+            if (player.getRocket().getX()==player.getRocket().getDestinationX() && player.getRocket().getY()==player.getRocket().getDestinationY() && player.getRocket().getDestinationX()!=getWidth()/2 && player.getRocket().getDestinationY()!=getHeight()-10){
 
                 //damage area effect
                 paint.setColor(Color.argb(255,76,192,128));
-                player.radius = 50;
-                canvas.drawCircle(player.x,player.y,player.radius,paint);
+                player.getRocket().setRadius(50);
+                canvas.drawCircle((float)player.getRocket().getX(),(float)player.getRocket().getY(),(float)player.getRocket().getRadius(),paint);
 
 
                 List<Meteor> destroyMeteors = new ArrayList<>();
                 for(int p=0;p<meteors.size();p++){
-                    if((meteors.get(p).x-player.x)*(meteors.get(p).x-player.x)+(meteors.get(p).y-player.y)*(meteors.get(p).y-player.y)<=(meteors.get(p).radius+player.radius)*(meteors.get(p).radius+player.radius)){
+                    if((meteors.get(p).getX()-player.getRocket().getX())*(meteors.get(p).getX()-player.getRocket().getX())+(meteors.get(p).getY()-player.getRocket().getY())*(meteors.get(p).getY()-player.getRocket().getY())<=(meteors.get(p).getRadius()+player.getRocket().getRadius())*(meteors.get(p).getRadius()+player.getRocket().getRadius())){
                         destroyMeteors.add(meteors.get(p));
+
                         initMeteor();
                         initMeteor();
+
+                        //if meteor is destroyed you gain 100 points
+                        player.setScore(player.getScore()+100);
+
                     }
 
                 }
@@ -102,12 +127,18 @@ public class GUI extends View implements View.OnTouchListener{
 
                 }
 
-                initPlayer();
+                player.setRocket(initRocket());
             }
         }
 
+        
+        player.getRocket().move();
 
-        player.move();
+        //Draw score
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(30);
+        canvas.drawText("Score:"+player.getScore(),5,50,paint);
+
 
         //Force to redraw everything
         invalidate();
@@ -127,10 +158,10 @@ public class GUI extends View implements View.OnTouchListener{
 
             //If player.move = true then you can't change the player destination
             //You can choose player destination only once
-            if (player.moving!=true){
-                player.moving = true;
-                player.destinationX = (float)event.getX();
-                player.destinationY = (float)event.getY();
+            if (player.getRocket().isMoving()!=true){
+                player.getRocket().setMoving(true);
+                player.getRocket().setDestinationX(event.getX());
+                player.getRocket().setDestinationY(event.getY());
             }
         }
 

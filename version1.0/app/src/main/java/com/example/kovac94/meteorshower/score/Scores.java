@@ -1,4 +1,4 @@
-package com.example.kovac94.meteorshower;
+package com.example.kovac94.meteorshower.score;
 
 import org.json.JSONException;
 import org.json.JSONObject;
