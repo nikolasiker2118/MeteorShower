@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".game.MainGame"
+            android:name=".game.Game"
             android:screenOrientation="landscape"></activity>
         <activity android:name=".score.Leaderboard"
             android:screenOrientation="landscape"></activity>

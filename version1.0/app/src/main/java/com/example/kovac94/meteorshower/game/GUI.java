@@ -17,11 +17,11 @@ import java.util.Random;
 
 public class GUI extends View implements View.OnTouchListener{
 
-    Paint paint,lifeBarPaint;
     Player player;
-    Thread thread = Thread.currentThread();
+    Paint paint,lifeBarPaint;
     List<Meteor> meteors;
     Random randomGenerator = new Random();
+    Thread thread = Thread.currentThread();
 
     public GUI(Context context) {
         super(context);
@@ -38,7 +38,7 @@ public class GUI extends View implements View.OnTouchListener{
     //Player creation
     private void initPlayer() {
 
-        this.player = new Player(this.initRocket());
+        player = new Player(initRocket());
     }
 
     //Rocket creation
@@ -78,11 +78,6 @@ public class GUI extends View implements View.OnTouchListener{
         paint.setColor(Color.argb(255,76,192,128));
         canvas.drawCircle((float)player.getRocket().getX(),(float)player.getRocket().getY(),(float)player.getRocket().getRadius(),paint);
 
-        //Draw life bar
-        lifeBarPaint.setStyle(Paint.Style.STROKE);
-        canvas.drawRect(10,getHeight()-30,getWidth()-10,getHeight()-10,lifeBarPaint);
-
-
         for(int i=0;i<meteors.size();i++){
 
             meteors.get(i).move();
@@ -91,6 +86,7 @@ public class GUI extends View implements View.OnTouchListener{
             if(meteors.get(i).getX()==meteors.get(i).getDestinationX() && meteors.get(i).getY()==meteors.get(i).getDestinationY()){
                 meteors.remove(meteors.get(i));
                 initMeteor();
+                player.setLife(player.getLife()-1);
             }
 
             //Draw meteor
@@ -113,7 +109,6 @@ public class GUI extends View implements View.OnTouchListener{
                         destroyMeteors.add(meteors.get(p));
 
                         initMeteor();
-                        initMeteor();
 
                         //if meteor is destroyed you gain 100 points
                         player.setScore(player.getScore()+100);
@@ -135,9 +130,20 @@ public class GUI extends View implements View.OnTouchListener{
         player.getRocket().move();
 
         //Draw score
-        paint.setColor(Color.WHITE);
         paint.setTextSize(30);
-        canvas.drawText("Score:"+player.getScore(),5,50,paint);
+        paint.setColor(Color.argb(255,76,192,128));
+        canvas.drawText("Score: "+player.getScore(),5,50,paint);
+
+        //Draw life circles
+        paint.setColor(Color.argb(255,245,35,84));
+        canvas.drawText("Life: ",5,80,paint);
+        int distance = 90;
+        paint.setColor(Color.argb(255,245,35,84));
+        for(int q=0;q<player.getLife();q++){
+            
+            canvas.drawCircle(distance,70,10,paint);
+            distance+=22;   
+        }
 
 
         //Force to redraw everything

@@ -6,7 +6,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-public class MainGame extends AppCompatActivity {
+public class Game extends AppCompatActivity {
 
     GUI gui;
     TextView txt;
