@@ -4,7 +4,7 @@ package com.example.kovac94.meteorshower.game;
  * Created by kovacmarko168 on 10/17/2016.
  */
 
-public class Rocket extends GameNode {
+public class Rocket extends GameObject {
 
     public Rocket(double x, double y, double radius, double speed, boolean moving) {
         super(x, y, radius);

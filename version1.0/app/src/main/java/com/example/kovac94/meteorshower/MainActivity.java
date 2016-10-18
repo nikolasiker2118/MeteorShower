@@ -8,7 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.view.View.OnClickListener;
-import com.example.kovac94.meteorshower.game.MainGame;
+import com.example.kovac94.meteorshower.game.Game;
 import com.example.kovac94.meteorshower.score.Leaderboard;
 
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         btn_startgame.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MainGame.class);
+                Intent intent = new Intent(v.getContext(), Game.class);
                 startActivityForResult(intent,0);
             }
         });

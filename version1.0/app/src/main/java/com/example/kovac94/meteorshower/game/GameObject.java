@@ -9,7 +9,7 @@ import static java.lang.Math.sqrt;
  * Created by kovacmarko168 on 10/17/2016.
  */
 
-public class GameNode {
+public class GameObject {
 
 	protected double x;
     protected double y;
@@ -19,7 +19,7 @@ public class GameNode {
     protected double destinationX;
     protected double destinationY;
 
-    public GameNode(double x, double y, double radius) {
+    public GameObject(double x, double y, double radius) {
         this.x = x;
         this.y = y;
         this.radius = radius;
@@ -83,17 +83,17 @@ public class GameNode {
 
     public void move() {
 
-        double disX=this.getDestinationX()-this.getX();
-        double disY=this.getDestinationY()-this.getY();
+        double disX=getDestinationX()-getX();
+        double disY=getDestinationY()-getY();
 
-        if (sqrt(disY*disY+disX*disX)<this.getSpeed()){
-            this.setX(this.getDestinationX()); 
-            this.setY(this.getDestinationY());
+        if (sqrt(disY*disY+disX*disX)<getSpeed()){
+            setX(getDestinationX()); 
+            setY(getDestinationY());
         }
         else {
             double radian = atan2(disY,disX);
-            this.setX(this.getX()+cos(radian)*this.getSpeed());
-            this.setY(this.getY()+sin(radian)*this.getSpeed());
+            setX(getX()+cos(radian)*getSpeed());
+            setY(getY()+sin(radian)*getSpeed());
         }
     }
 }
