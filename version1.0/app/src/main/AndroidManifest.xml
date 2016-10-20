@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kovac94.meteorshower">
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -20,9 +21,10 @@
         </activity>
         <activity
             android:name=".game.Game"
-            android:screenOrientation="landscape"></activity>
-        <activity android:name=".score.Leaderboard"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".score.Leaderboard"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>
