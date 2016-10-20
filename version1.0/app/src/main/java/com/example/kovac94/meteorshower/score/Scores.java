@@ -21,47 +21,7 @@ public class Scores {
         this.difficulty = difficulty;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getTime_played() {
-        return time_played;
-    }
-
-    public void setTime_played(int time_played) {
-        this.time_played = time_played;
-    }
-
-    public String getNick() {
-        return nick;
-    }
-
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
-
-    public String getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
-    }
-
-
+    //Making JSON Object from class attributes
     public JSONObject getJSONObject() {
         JSONObject obj = new JSONObject();
         try {
@@ -74,5 +34,6 @@ public class Scores {
         }
         return obj;
     }
+
 
 }

@@ -1,11 +1,16 @@
 package com.example.kovac94.meteorshower.game;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.example.kovac94.meteorshower.MainActivity;
+import com.example.kovac94.meteorshower.score.Leaderboard;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -139,7 +144,7 @@ public class GUI extends View implements View.OnTouchListener{
         canvas.drawText("Life: ",5,80,paint);
         int distance = 90;
         paint.setColor(Color.argb(255,245,35,84));
-        for(int q=0;q<player.getLife();q++){
+        for (int q=0; q<player.getLife(); q++){
             
             canvas.drawCircle(distance,70,10,paint);
             distance+=22;   

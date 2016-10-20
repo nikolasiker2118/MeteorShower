@@ -20,6 +20,7 @@ public class ScoresAdapter extends ArrayAdapter<Scores> {
     private Context context;
     private int resource;
     private ArrayList <Scores> objects;
+
     //Adapter constructor
     public ScoresAdapter(Context context, int resource, ArrayList<Scores> objects) {
         super(context, resource, objects);

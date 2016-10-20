@@ -24,7 +24,7 @@
             android:layout_height="76dp"
             app:srcCompat="@drawable/meteor_circle2"
             android:id="@+id/imageView4"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="30dp" />
 
         <Button
         android:text="Start Game"

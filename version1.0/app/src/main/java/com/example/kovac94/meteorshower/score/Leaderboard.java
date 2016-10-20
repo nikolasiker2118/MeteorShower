@@ -33,6 +33,7 @@ public class Leaderboard extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_leaderboard);
+
         // Adding hardcoded data into list for testing purposes
         sc1 = new Scores(0, 2500, 120, "Nikola", "Easy");
         Scores sc2 = new Scores(1, 5360, 500, "Marko", "Easy");
@@ -49,6 +50,7 @@ public class Leaderboard extends AppCompatActivity {
         for (int i = 0; i < list.size(); i++){
             array.put(list.get(i).getJSONObject());
         }
+
         // Serializing JSONArray in file
         Writer output = null;
         File file = new File("storage/emulated/0/JsonShower.json");
