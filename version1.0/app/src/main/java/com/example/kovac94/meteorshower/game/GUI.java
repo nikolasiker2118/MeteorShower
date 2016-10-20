@@ -18,7 +18,7 @@ import java.util.Random;
 public class GUI extends View implements View.OnTouchListener{
 
     Player player;
-    Paint paint,lifeBarPaint;
+    Paint paint;
     List<Meteor> meteors;
     Random randomGenerator = new Random();
     Thread thread = Thread.currentThread();
@@ -26,19 +26,14 @@ public class GUI extends View implements View.OnTouchListener{
     public GUI(Context context) {
         super(context);
         paint = new Paint();
-        
-        //life bar paint init
-        lifeBarPaint = new Paint();
-        lifeBarPaint.setColor(Color.argb(255,245,35,84));
-        
         setOnTouchListener(this);
         meteors = new ArrayList<>();
     }
 
     //Player creation
-    private void initPlayer() {
+    private void createPlayer() { 
 
-        player = new Player(initRocket());
+        if (player==null) player = new Player(initRocket());
     }
 
     //Rocket creation
@@ -49,65 +44,120 @@ public class GUI extends View implements View.OnTouchListener{
         return rocket;
     }
 
+    /*
+        @param we are sending percent as a parametar
+        @return for example: how much 23%(percent param) of the current hight
+    */
+    public double yToPercent(double percent){
+
+        double y = (getHeight()/100)*percent;
+
+        return y;
+    }
+
+    public double xToPercent(double percent){
+
+        double x = (getWidth()/100)*percent;
+
+        return x;
+    }
+
     //Meteor creation
     private void initMeteor(){
 
         //Meteor position and destination
         //Random destinationX
-        int low = 10;
-        int high = getWidth()-10;
-        int destX = randomGenerator.nextInt(high-low) + low;
+        int minX = 10;
+        int maxX = getWidth()-10;
+        int destX = randomGenerator.nextInt(maxX-minX) + minX;
 
         //Random x
-        int x = randomGenerator.nextInt(high-low) + low;
+        int x = randomGenerator.nextInt(maxX-minX) + minX;
         int y = -20;
 
         meteors.add(new Meteor(x,y,destX,getHeight(),20));
+
     }
 
     @Override
     public void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        if (player==null)initPlayer();
-        if(meteors.isEmpty()) initMeteor();
+
         
+        /*
+            if player is not created
+            well, create one
+        */
+        createPlayer();
 
-        canvas.drawColor(Color.argb(255,43,43,43));
 
-        //Draw player
+        /*
+            if no enemys are in game add some to
+            enemy holder(meteors) so they can appear on the screen
+        */
+        if(meteors.isEmpty()) initMeteor();
+
+
+        /*
+            prepare color for player and then
+            draw him to the screen using his coordinates
+        */
         paint.setColor(Color.argb(255,76,192,128));
         canvas.drawCircle((float)player.getRocket().getX(),(float)player.getRocket().getY(),(float)player.getRocket().getRadius(),paint);
 
+
+        /*
+            allow meteors to move by calling move() method
+        */
         for(int i=0;i<meteors.size();i++){
 
             meteors.get(i).move();
 
-            //check if meteor destination is reached
+            /*
+                if meteor destination is reached remove it from the game,
+                create another one and then take one life from the player
+            */
             if(meteors.get(i).getX()==meteors.get(i).getDestinationX() && meteors.get(i).getY()==meteors.get(i).getDestinationY()){
                 meteors.remove(meteors.get(i));
                 initMeteor();
                 player.setLife(player.getLife()-1);
+
+
+            /*
+                @WARRNING@
+                this part of the code is reserved for end game
+                if player life is equal to zero finish the game
+
+                @FINISH THIS PART LATER@
+            */
             }
 
-            //Draw meteor
+
+            /*
+            prepare color for the meteor and then
+            draw it to the screen using his coordinates
+            */
             paint.setColor(Color.RED);
             canvas.drawCircle((float)meteors.get(i).getX(),(float)meteors.get(i).getY(),(float)meteors.get(i).getRadius(),paint);
 
 
-            //Check if player destination is reached
+            /* 
+                if player destination is reached we have to reset his position
+                and make some cool explosion effect
+            */
             if (player.getRocket().getX()==player.getRocket().getDestinationX() && player.getRocket().getY()==player.getRocket().getDestinationY() && player.getRocket().getDestinationX()!=getWidth()/2 && player.getRocket().getDestinationY()!=getHeight()-10){
 
-                //damage area effect
+                
                 paint.setColor(Color.argb(255,76,192,128));
                 player.getRocket().setRadius(50);
                 canvas.drawCircle((float)player.getRocket().getX(),(float)player.getRocket().getY(),(float)player.getRocket().getRadius(),paint);
-
 
                 List<Meteor> destroyMeteors = new ArrayList<>();
                 for(int p=0;p<meteors.size();p++){
                     if((meteors.get(p).getX()-player.getRocket().getX())*(meteors.get(p).getX()-player.getRocket().getX())+(meteors.get(p).getY()-player.getRocket().getY())*(meteors.get(p).getY()-player.getRocket().getY())<=(meteors.get(p).getRadius()+player.getRocket().getRadius())*(meteors.get(p).getRadius()+player.getRocket().getRadius())){
                         destroyMeteors.add(meteors.get(p));
 
+                        initMeteor();
                         initMeteor();
 
                         //if meteor is destroyed you gain 100 points

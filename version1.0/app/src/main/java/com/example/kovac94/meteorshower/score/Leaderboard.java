@@ -23,9 +23,6 @@ public class Leaderboard extends AppCompatActivity {
     ArrayList <Scores> list= new ArrayList<Scores>();
     Scores sc1;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
