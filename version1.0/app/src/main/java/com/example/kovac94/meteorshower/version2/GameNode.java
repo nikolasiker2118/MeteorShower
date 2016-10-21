@@ -18,13 +18,35 @@ public class GameNode {
 	protected double radius; 
 	protected double destinationX;
 	protected double destinationY;
+	protected double screenWidth;
+	protected double screenHeight;
 
-    public GameNode(double x, double y, double speed, double radius, double destinationX, double destinationY) {
+    public GameNode(double screenWidth, double screenHeight) {
+        this.screenWidth = screenWidth;
+        this.screenHeight = screenHeight;
+    }
+
+    public void setX(double x) {
         this.x = x;
+    }
+
+    public void setY(double y) {
         this.y = y;
+    }
+
+    public void setSpeed(double speed) {
         this.speed = speed;
+    }
+
+    public void setRadius(double radius) {
         this.radius = radius;
+    }
+
+    public void setDestinationX(double destinationX) {
         this.destinationX = destinationX;
+    }
+
+    public void setDestinationY(double destinationY) {
         this.destinationY = destinationY;
     }
 
@@ -32,49 +54,70 @@ public class GameNode {
         return x;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
     public double getY() {
         return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     public double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
-
     public double getRadius() {
         return radius;
-    }
-
-    public void setRadius(double radius) {
-        this.radius = radius;
     }
 
     public double getDestinationX() {
         return destinationX;
     }
 
-    public void setDestinationX(double destinationX) {
-        this.destinationX = destinationX;
-    }
-
     public double getDestinationY() {
         return destinationY;
     }
 
-    public void setDestinationY(double destinationY) {
-        this.destinationY = destinationY;
+    public double getScreenWidth() {
+        return screenWidth;
     }
+
+    public double getScreenHeight() {
+        return screenHeight;
+    }
+
+
+    public double xToPercent(double percent){
+
+    	double x = getX();
+
+    	x = (getScreenWidth()/100)*percent;
+
+    	return x;
+    } 
+
+    public double yToPercent(double percent){
+
+    	double y = getY();
+
+    	y = (getScreenHeight()/100)*percent;
+
+    	return y;
+    }
+
+    public double radiusToPercent(double percent){
+
+    	double x = getX();
+
+    	x = (getScreenWidth()/100)*percent;
+
+    	return x;
+    }
+
+    public double speedToPercent(double percent){
+
+    	double x = getX();
+
+    	x = (getScreenWidth()/100)*percent;
+
+    	return x;
+    } 
 
     public void move(){
 
