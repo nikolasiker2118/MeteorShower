@@ -33,6 +33,7 @@ public class GUI extends View implements View.OnTouchListener{
         paint = new Paint();
         setOnTouchListener(this);
         meteors = new ArrayList<>();
+
     }
 
     //Player creation
@@ -88,7 +89,8 @@ public class GUI extends View implements View.OnTouchListener{
     public void onDraw(Canvas canvas){
         super.onDraw(canvas);
 
-        
+        System.out.println(getWidth());
+        System.out.println(getHeight());
         /*
             if player is not created
             well, create one
@@ -229,3 +231,6 @@ public class GUI extends View implements View.OnTouchListener{
         return false;
     }
 }
+
+
+
